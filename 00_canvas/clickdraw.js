@@ -22,11 +22,17 @@ tgl.addEventListener('click', function(){
   }
 })
 
-ctx.addEventListener('click', function(){
+c.addEventListener('click', function(e){
+  var r = c.getBoundingClientRect();
+  console.log(r);
+  var x = e.clientX - r.left;
+  var y = e.clientY - r.top;
   if (rect){
-    
+    ctx.fillRect(x - 10, y - 10, 20, 20);
   }
   else {
-
+    ctx.beginPath();
+    ctx.ellipse(x, y, 5, 5, 0, 0, 2 * Math.PI);
+    ctx.fill();
   }
 })
