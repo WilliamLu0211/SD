@@ -1,6 +1,9 @@
 var img = document.getElementById("vimage");
 var mv = document.getElementById("but_move");
 var clr = document.getElementById("but_clear");
+var id = 0;
+
+var circles = [];
 
 var newDot = true;
 
@@ -12,6 +15,9 @@ var addDot = function(x, y){
   c.setAttribute("fill", "purple");
   c.setAttribute("stroke", "black");
   img.appendChild(c);
+  c.xVel = 1;
+  c.yVel = 1;
+  circles.push(c);
   return c;
 }
 
@@ -42,6 +48,18 @@ clr.addEventListener('click', function(e){
   while (img.firstChild)
     img.removeChild(img.firstChild);
 });
+
+var startMove = function(){
+  window.cancelAnimationFrame(id);
+  var c;
+  draw = function(){
+    for (int i = 0; i < circles.length; i ++){
+      c = circles[i];
+      c.setAttribute("cx", c.getAttribute("cx") + c.xVel);
+      c.setAttribute
+    }
+  }
+}
 
 // mv.addEventListener('click', function(){
 //   for (i = 0; i < )
