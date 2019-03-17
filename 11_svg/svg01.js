@@ -1,5 +1,6 @@
 var img = document.getElementById("vimage");
 var mv = document.getElementById("but_move");
+var sct = document.getElementById("but_scatter");
 var clr = document.getElementById("but_clear");
 var id = 0;
 
@@ -15,6 +16,8 @@ var addDot = function(x, y){
   c.setAttribute("fill", "purple");
   c.setAttribute("stroke", "black");
   img.appendChild(c);
+  c.x = x;
+  c.y = y;
   c.xVel = 1;
   c.yVel = 1;
   circles.push(c);
@@ -49,18 +52,37 @@ clr.addEventListener('click', function(e){
     img.removeChild(img.firstChild);
 });
 
-var startMove = function(){
-  window.cancelAnimationFrame(id);
-  var c;
-  draw = function(){
-    for (int i = 0; i < circles.length; i ++){
-      c = circles[i];
-      c.setAttribute("cx", c.getAttribute("cx") + c.xVel);
-      c.setAttribute
-    }
+var update = function(){
+  id = window.requestAnimationFrame(update);
+  var c, r;
+  for (i = 0; i < circles.length; i ++){
+    c = circles[i];
+    r = c.getAttribute("r");
+    c.x += c.xVel;
+    c.y += c.yVel;
+    c.setAttribute("cx", c.x);
+    c.setAttribute("cy", c.y);
+    if (c.x >= img.getAttribute("width") - r)
+      c.xVel = -Math.abs(c.xVel);
+    if (c.x <= r)
+      c.xVel = Math.abs(c.xVel);
+    if (c.y >= img.getAttribute("height") - r)
+      c.yVel = -Math.abs(c.yVel);
+    if (c.y <= r)
+      c.yVel = Math.abs(c.yVel);
   }
 }
 
-// mv.addEventListener('click', function(){
-//   for (i = 0; i < )
-// });
+mv.addEventListener('click', function(){
+  window.cancelAnimationFrame(id);
+  update();
+});
+
+sct.addEventListener('click', function(){
+  var angle;
+  for (i = 0; i < circles.length; i ++){
+    angle = Math.random() * 2 * Math.PI;
+    circles[i].xVel = 2 * Math.cos(angle);
+    circles[i].yVel = 2 * Math.sin(angle);
+  }
+})
