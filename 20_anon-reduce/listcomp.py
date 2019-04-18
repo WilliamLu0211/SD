@@ -5,9 +5,21 @@
 
 from functools import reduce
 
-f = open('book.txt', 'r')
-text = f.read().replace('.', ' ').replace(',', ' ').replace('"', ' ').replace(';', ' ').replace('?', ' ').replace('!', ' ').replace(':', ' ')
-wordList = text.split()
+f = open('short.txt', 'r')
+text = f.read().lower()
+
+cleaner = text.replace('.', ' ')\
+              .replace(',', ' ')\
+              .replace('"', ' ')\
+              .replace(';', ' ')\
+              .replace('?', ' ')\
+              .replace('!', ' ')\
+              .replace(':', ' ')\
+              .replace('(', ' ')\
+              .replace(')', ' ')
+
+wordList = cleaner.split()
+# charList = list(text)
 
 def getFrequency(word):
     # print(l)
@@ -15,9 +27,10 @@ def getFrequency(word):
     return reduce((lambda x, y: x + 1 if y == word else x), l)
 
 def totalFrequency(words):
-    frequencies = [getFrequency(x) for x in words]
-    # print(frequencies)
-    return reduce((lambda x, y: x + y), frequencies)
+    inputList = words.lower().split()
+    numWords = len(inputList)
+    wordGroups = [[wordList[j] for j in range(i, i + numWords)] for i in range(len(wordList) - numWords + 1)]
+    print(wordGroups)
 
 def mostFrequency():
     l = [{}] + wordList
@@ -33,6 +46,6 @@ def mostFrequency():
 print(getFrequency('the'))
 print(getFrequency('you'))
 
-print(totalFrequency(['the', 'you']))
+print(totalFrequency('this ebook'))
 
 print(mostFrequency())
