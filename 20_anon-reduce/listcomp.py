@@ -1,11 +1,11 @@
 # William Lu, Qian Zhou
 # SoftDev2 pd7
 # K20 -- Reductio ad Absurdum
-# 2019-04-18 R
+# 2019-04-29 M
 
 from functools import reduce
 
-f = open('short.txt', 'r')
+f = open('book.txt', 'r')
 text = f.read().lower()
 
 cleaner = text.replace('.', ' ')\
@@ -28,9 +28,12 @@ def getFrequency(word):
 
 def totalFrequency(words):
     inputList = words.lower().split()
+    print(inputList)
     numWords = len(inputList)
-    wordGroups = [[wordList[j] for j in range(i, i + numWords)] for i in range(len(wordList) - numWords + 1)]
+    wordGroups = [0] + [[wordList[j] for j in range(i, i + numWords)] for i in range(len(wordList) - numWords + 1)]
     print(wordGroups)
+    return reduce((lambda x, y: x + 1 if y == inputList else x), wordGroups)
+
 
 def mostFrequency():
     l = [{}] + wordList
