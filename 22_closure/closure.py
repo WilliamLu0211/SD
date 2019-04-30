@@ -1,3 +1,8 @@
+# William Lu
+# SoftDev2 pd7
+# K22 -- Closure
+# 2019-05-01 W
+
 def repeat(s):
     def freq(n):
         return s * n
@@ -27,13 +32,19 @@ def make_counter():
         nonlocal ctr
         ctr += 1
         return ctr
-    return inc
+    def acc():
+        nonlocal ctr
+        return ctr
+    return {'increment':inc, 'display':acc};
 
 ctr1 = make_counter()
-print(ctr1())
-print(ctr1())
+print(ctr1['increment']())
+print(ctr1['increment']())
 
 ctr2 = make_counter()
-print(ctr2())
-print(ctr1())
-print(ctr2())
+print(ctr2['increment']())
+print(ctr1['increment']())
+print(ctr2['increment']())
+
+print(ctr1['display']())
+print(ctr2['display']())
