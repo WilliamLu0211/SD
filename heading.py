@@ -17,7 +17,7 @@ def memo(f):
     m = {}
     def helper(x):
         if x not in m:
-            m[x] = m[x-1] + m[x-2]
+            m[x] = f(x)
         return m[x]
     return helper
 
@@ -32,4 +32,4 @@ def fib(n):
         return fib(n-1) + fib(n-2)
 
 # fib = memo(fib)
-print(fib(3))
+print(fib(6))
